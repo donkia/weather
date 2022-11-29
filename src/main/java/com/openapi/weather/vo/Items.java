@@ -6,6 +6,6 @@ import java.util.List;
 
 @Data
 public class Items {
-    public List<Weather> item = null;
+    public List<Item> item = null;
 
 }

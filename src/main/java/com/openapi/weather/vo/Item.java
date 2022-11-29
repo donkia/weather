@@ -1,13 +1,10 @@
 package com.openapi.weather.vo;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 
-@Getter
-@Setter
-@ToString
-public class Weather {
+import lombok.Data;
+
+@Data
+public class Item {
 
     String baseDate;
     String baseTime;

@@ -97,7 +97,7 @@ class getWeatherOpenApiData {
         urlBuilder.append("&" + URLEncoder.encode("pageNo","UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /*페이지번호*/
         urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode("1000", "UTF-8")); /*한 페이지 결과 수*/
         urlBuilder.append("&" + URLEncoder.encode("dataType","UTF-8") + "=" + URLEncoder.encode("JSON", "UTF-8")); /*요청자료형식(XML/JSON) Default: XML*/
-        urlBuilder.append("&" + URLEncoder.encode("base_date","UTF-8") + "=" + URLEncoder.encode("20221127", "UTF-8")); /*‘21년 6월 28일발표*/
+        urlBuilder.append("&" + URLEncoder.encode("base_date","UTF-8") + "=" + URLEncoder.encode("20221129", "UTF-8")); /*‘21년 6월 28일발표*/
         urlBuilder.append("&" + URLEncoder.encode("base_time","UTF-8") + "=" + URLEncoder.encode("0500", "UTF-8")); /*05시 발표*/
         urlBuilder.append("&" + URLEncoder.encode("nx","UTF-8") + "=" + URLEncoder.encode("55", "UTF-8")); /*예보지점의 X 좌표값*/
         urlBuilder.append("&" + URLEncoder.encode("ny","UTF-8") + "=" + URLEncoder.encode("127", "UTF-8")); /*예보지점의 Y 좌표값*/
@@ -117,6 +117,7 @@ class getWeatherOpenApiData {
         final HttpEntity<?> entity = new HttpEntity<>(headers);
 
         ResponseDto responseDto = rt.exchange(url.toURI(), HttpMethod.GET, entity, ResponseDto.class).getBody();
+        System.out.println(responseDto.toString());
         Assertions.assertEquals(809, responseDto.getResponse().getBody().getTotalCount());
 
     }
