@@ -9,7 +9,8 @@ import javax.persistence.Id;
 
 
 @Entity
-public class Weather {
+@Getter
+public class Weather extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,9 +25,6 @@ public class Weather {
     String nx;
     String ny;
 
-    Weather(){
-
-    }
 
     @Builder
     Weather(String baseDate, String baseTime, String category, String fcstDate, String fcstTime, String fcstValue, String nx, String ny){
@@ -38,5 +36,9 @@ public class Weather {
         this.fcstValue = fcstValue;
         this.nx = nx;
         this.ny = ny;
+    }
+
+    public Weather() {
+
     }
 }
