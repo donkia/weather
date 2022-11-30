@@ -7,6 +7,6 @@ import java.net.URL;
 
 public interface Openapi {
 
-    public URL setURL() throws UnsupportedEncodingException, MalformedURLException;
+    public URL setURL() throws UnsupportedEncodingException, MalformedURLException, URISyntaxException;
     public void getData() throws UnsupportedEncodingException, MalformedURLException, URISyntaxException;
 }
