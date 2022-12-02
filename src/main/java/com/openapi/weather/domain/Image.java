@@ -33,4 +33,8 @@ public class Image extends BaseTimeEntity {
         this.fileUrl = fileUrl;
         this.member = member;
     }
+
+    public Image() {
+
+    }
 }
