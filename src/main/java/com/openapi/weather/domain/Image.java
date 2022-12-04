@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.Getter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 @Getter
@@ -22,16 +23,20 @@ public class Image extends BaseTimeEntity {
     @Column(nullable = false)
     private String fileUrl;
 
+    @Column(nullable = false)
+    private LocalDate uploadDate;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name= "member_id")
     private Member member;
 
     @Builder
-    Image(String fileName, String fileOriName, String fileUrl, Member member){
+    Image(String fileName, String fileOriName, String fileUrl, Member member, LocalDate uploadDate){
         this.fileName = fileName;
         this.fileOriName = fileOriName;
         this.fileUrl = fileUrl;
         this.member = member;
+        this.uploadDate = uploadDate;
     }
 
     public Image() {

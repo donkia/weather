@@ -14,6 +14,7 @@ import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 //@DataJpaTest
 @SpringBootTest
@@ -49,6 +50,7 @@ class ImageServiceTest {
                 .fileName(fileName)
                 .fileOriName(multipartFile.getOriginalFilename())
                 .fileUrl("/images/" + fileName)
+                .uploadDate(LocalDate.now())
                 .member(member)
                 .build();
 

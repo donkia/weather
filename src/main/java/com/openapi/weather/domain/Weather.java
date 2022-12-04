@@ -1,5 +1,6 @@
 package com.openapi.weather.domain;
 
+import com.openapi.weather.vo.Item;
 import lombok.*;
 
 import javax.persistence.Entity;
@@ -40,5 +41,18 @@ public class Weather extends BaseTimeEntity {
 
     public Weather() {
 
+    }
+
+    public static Weather convertItemToWeather(Item item){
+        return Weather.builder()
+                .baseDate(item.getBaseDate())
+                .baseTime(item.getBaseTime())
+                .category(item.getCategory())
+                .fcstDate(item.getFcstDate())
+                .fcstTime(item.getFcstTime())
+                .fcstValue(item.getFcstValue())
+                .nx(item.getNx())
+                .ny(item.getNy())
+                .build();
     }
 }
