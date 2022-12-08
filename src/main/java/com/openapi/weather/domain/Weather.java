@@ -2,57 +2,52 @@ package com.openapi.weather.domain;
 
 import com.openapi.weather.vo.Item;
 import lombok.*;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.io.Serializable;
 
 
 @Entity
 @Getter
-public class Weather extends BaseTimeEntity {
+@EntityListeners(AuditingEntityListener.class)
+public class Weather extends BaseTimeEntity implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    @EmbeddedId
+    @Column(name="weahter_id")
+    private WeatherID weatherID;
 
-    String baseDate;
-    String baseTime;
-    String category;
-    String fcstDate;
-    String fcstTime;
     String fcstValue;
-    String nx;
-    String ny;
 
 
     @Builder
-    Weather(String baseDate, String baseTime, String category, String fcstDate, String fcstTime, String fcstValue, String nx, String ny){
-        this.baseDate = baseDate;
-        this.baseTime = baseTime;
-        this.category = category;
-        this.fcstDate = fcstDate;
-        this.fcstTime = fcstTime;
+    Weather(WeatherID weatherID, String fcstValue){
+        this.weatherID = weatherID;
         this.fcstValue = fcstValue;
-        this.nx = nx;
-        this.ny = ny;
     }
 
     public Weather() {
 
     }
 
+    public void setFcstValue(String fcstValue){
+        this.fcstValue = fcstValue;
+    }
+
     public static Weather convertItemToWeather(Item item){
-        return Weather.builder()
+        WeatherID weatherID = WeatherID.builder()
                 .baseDate(item.getBaseDate())
                 .baseTime(item.getBaseTime())
                 .category(item.getCategory())
                 .fcstDate(item.getFcstDate())
                 .fcstTime(item.getFcstTime())
-                .fcstValue(item.getFcstValue())
                 .nx(item.getNx())
                 .ny(item.getNy())
+                .build();
+
+        return Weather.builder()
+                .weatherID(weatherID)
+                .fcstValue(item.getFcstValue())
                 .build();
     }
 }
